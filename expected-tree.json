@@ -1,0 +1,52 @@
+{
+    "schema_version": "1.0",
+    "pm": "composer",
+    "pm_version_tested": "2.7",
+    "php_version_tested": "8.2",
+    "docker_image": "composer:2.7-php8.2",
+    "lockfile": "composer.lock",
+    "pattern": "version-matrix-php82-composer27",
+    "notes": "Toolchain-pin probe. PHP 8.2 + Composer 2.7. Single direct dep (monolog/monolog 3.10.0) with one transitive dep (psr/log 3.0.2). plugin-api-version in lockfile must be 2.6.0 (Composer 2.7 still uses plugin API 2.6.0). No dev packages.",
+    "packages": [
+        {
+            "name": "monolog/monolog",
+            "version": "3.10.0",
+            "scope": "require",
+            "source": "registry",
+            "direct": true,
+            "children": [
+                {
+                    "name": "psr/log",
+                    "version": "3.0.2",
+                    "scope": "require",
+                    "source": "registry",
+                    "direct": false,
+                    "children": []
+                }
+            ]
+        }
+    ],
+    "total_packages": 2,
+    "direct_count": 1,
+    "transitive_count": 1,
+    "unique_packages": [
+        "monolog/monolog:3.10.0",
+        "psr/log:3.0.2"
+    ],
+    "toolchain_assertions": {
+        "plugin_api_version": "2.6.0",
+        "composer_version": "2.7",
+        "php_version": "8.2",
+        "docker_image": "composer:2.7-php8.2"
+    },
+    "mend_detection_expectations": {
+        "all_packages_must_appear": true,
+        "source_for_all": "registry",
+        "no_missing_transitives": true,
+        "failure_modes_exercised": [
+            "wrong resolved version under PHP 8.2 platform constraint",
+            "missing transitive psr/log",
+            "source misclassified as non-Packagist"
+        ]
+    }
+}
